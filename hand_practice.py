@@ -5,6 +5,7 @@ import cv2
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 
+# make a quick edit
 # cv2 capture
 cap = cv2.VideoCapture(0)
 
