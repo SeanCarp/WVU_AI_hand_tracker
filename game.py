@@ -22,7 +22,7 @@ def game_logic(attacker, defender):
     if defender == 5:
         defender = 0
     elif defender > 5:
-        defender -= 5
+        defender -= 4
     return defender
 
 # Game Loop
@@ -41,13 +41,17 @@ while(True):
         #
         #   PLAYER SIDE
         #
-        player_hand = input("Left or Right (L/R)[Player]?").lower()
-        player_attack = input("Left or Right (L/R)[Computer]?").lower()
+        ran = False
+        while(not ran):
+            player_hand = input("Left or Right (L/R)[Player]?").lower()
+            player_attack = input("Left or Right (L/R)[Computer]?").lower()
 
-        attacker = player[0 if player_hand == 'l' else 1]
-        defender = computer[0 if player_attack == 'l' else 1]
+            attacker = player[0 if player_hand == 'l' else 1]
+            defender = computer[0 if player_attack == 'l' else 1]
 
-        computer[0 if player_attack == 'l' else 1] = game_logic(attacker, defender)
+            if not(attacker == 0 or defender == 0):
+                computer[0 if player_attack == 'l' else 1] = game_logic(attacker, defender)
+                ran = True
 
         # GAME UPDATE
         if not game_update(computer, player):
@@ -58,9 +62,14 @@ while(True):
         #
         #   COMPUTER SIDE
         #
-        defender_flag = rand.randint(0,1) == 1
+        ran = False
+        while(not ran):
+            defender_flag = rand.randint(0,1) == 1
 
-        attacker = computer[0 if rand.randint(0,1) == 1 else 1]
-        defender = player[0 if defender_flag else 1]
+            attacker = computer[0 if rand.randint(0,1) == 1 else 1]
+            defender = player[0 if defender_flag else 1]
 
-        player[0 if defender_flag else 1] = game_logic(attacker, defender)
+            if not(attacker == 0 or defender == 0):
+                player[0 if defender_flag else 1] = game_logic(attacker, defender)
+                ran = True
+        
